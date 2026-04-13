@@ -26,9 +26,10 @@ import {
 } from './utils/storage'
 import { fetchAllQuotes, fetchSentiment } from './utils/finnhub'
 import { fetchPortfolioSummary } from './utils/claudeAi'
-import StockModal    from './components/StockModal'
-import SettingsModal from './components/SettingsModal'
-import HistoryChart  from './components/HistoryChart'
+import StockModal      from './components/StockModal'
+import SettingsModal   from './components/SettingsModal'
+import HistoryChart    from './components/HistoryChart'
+import ProjectionModal from './components/ProjectionModal'
 
 // -------------------------------------------------------------------
 // DESIGN — NOTE SUR L'ASPECT VISUEL
@@ -74,10 +75,11 @@ export default function App() {
   const [loading,     setLoading]     = useState(false)
   const [aiSummary,   setAiSummary]   = useState('')
   const [aiLoading,   setAiLoading]   = useState(false)
-  const [showAdd,     setShowAdd]     = useState(false)
-  const [editStock,   setEditStock]   = useState(null)
+  const [showAdd,      setShowAdd]      = useState(false)
+  const [editStock,    setEditStock]    = useState(null)
   const [showSettings, setShowSettings] = useState(false)
-  const [chartView,   setChartView]   = useState('pnl')   // 'pnl' ou 'value'
+  const [showProjection, setShowProjection] = useState(false)  // modale projection 15 ans
+  const [chartView,    setChartView]    = useState('pnl')   // 'pnl' ou 'value'
   const [lastRefresh, setLastRefresh] = useState(null)
   const [error,       setError]       = useState('')
 
@@ -234,6 +236,13 @@ export default function App() {
           )}
           <button className="btn-ghost btn-sm" onClick={refreshPrices} disabled={loading}>
             {loading ? 'Chargement...' : 'Rafraichir les prix'}
+          </button>
+          <button
+            className="btn-primary btn-sm"
+            onClick={() => setShowProjection(true)}
+            title="Projection du portfolio sur 15 ans"
+          >
+            Projection 15 ans
           </button>
           <button className="btn-ghost btn-sm" onClick={() => setShowSettings(true)}>
             Parametres
@@ -423,6 +432,13 @@ export default function App() {
       </main>
 
       {/* ---- Modals ---- */}
+      {showProjection && (
+        <ProjectionModal
+          portfolioValue={totalValue}
+          claudeApiKey={apiKeys.claude}
+          onClose={() => setShowProjection(false)}
+        />
+      )}
       {showAdd && (
         <StockModal
           existing={editStock}
