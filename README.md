@@ -17,7 +17,7 @@ Suivi de portfolio boursier en React/Vite, deployable sur GitHub Pages.
 ### 1. Cloner et installer
 
 ```bash
-git clone https://github.com/TON_USERNAME/money.git
+git clone https://github.com/Anna-Paulina/money.git
 cd money
 npm install
 ```
@@ -58,7 +58,7 @@ Entrer les cles API via le bouton **Parametres** dans l'app.
 
 ```bash
 # Pousser le code sur GitHub
-git remote add origin https://github.com/TON_USERNAME/money.git
+git remote add origin https://github.com/Anna-Paulina/money.git
 git push -u origin main
 
 # Deployer
@@ -68,7 +68,7 @@ npm run deploy
 Dans GitHub : Settings > Pages > source = branche `gh-pages`.
 
 L'app sera disponible sur :
-`https://TON_USERNAME.github.io/money/`
+`https://Anna-Paulina.github.io/money/`
 
 ### Mises a jour suivantes
 
